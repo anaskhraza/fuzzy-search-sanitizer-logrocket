@@ -1,4 +1,7 @@
-# 🚀 LogRocket Fuzzy Search Sanitizer
+# Fuzzy Search Sanitizer For LogRocket
+
+🚀 LogRocket Fuzzy Search Sanitizer
+This is a modified version of logrocket-fuzzy-search
 
 [![Build Status](https://travis-ci.com/jbailey4/logrocket-fuzzy-search-sanitizer.svg?branch=master)](https://travis-ci.com/jbailey4/logrocket-fuzzy-search-sanitizer)
 
