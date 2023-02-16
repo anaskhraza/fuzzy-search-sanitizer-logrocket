@@ -6,9 +6,9 @@ interface INetworkRequestResponse {
   headers: object;
 }
 
-export default class fuzzySearch {
+export default class FuzzySearch {
   public static setup(fields: string[], isSubStringMatch?: boolean) {
-    const instance = new fuzzySearch(fields, isSubStringMatch);
+    const instance = new FuzzySearch(fields, isSubStringMatch);
 
     return {
       requestSanitizer: instance.requestSanitizer.bind(instance),

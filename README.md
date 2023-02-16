@@ -7,8 +7,6 @@ Build Status
 
 Optional LogRocket plugin to help sanitize data from network requests and responses.
 
-Optional LogRocket plugin to help sanitize data from network requests and responses.
-
 [Blog post](https://medium.com/@josh_bailey4/sanitizing-data-with-logrocket-2af1bbbe46a1)
 
 ---

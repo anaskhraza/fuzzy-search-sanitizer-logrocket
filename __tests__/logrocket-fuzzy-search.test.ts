@@ -1,4 +1,4 @@
-import fuzzySearch from "../src";
+import FuzzySearch from "../src";
 
 const networkReqRes = {
   body: "{}",
@@ -7,14 +7,14 @@ const networkReqRes = {
 };
 
 test("setup method returns request/response logrocket sanitizers", () => {
-  const lrfs = fuzzySearch.setup([]);
+  const lrfs = FuzzySearch.setup([]);
 
   expect(lrfs.requestSanitizer);
   expect(lrfs.responseSanitizer);
 });
 
 test("passed in keynames are masked", () => {
-  const lrfs = new fuzzySearch(["privateKeyName"]);
+  const lrfs = new FuzzySearch(["privateKeyName"]);
 
   networkReqRes.body = JSON.stringify({
     resource: { privateKeyName: 42, publicKeyName: 0 },
@@ -27,7 +27,7 @@ test("passed in keynames are masked", () => {
 });
 
 test("GET requests are ignored", () => {
-  const lrfs = new fuzzySearch(["privateKeyName"]);
+  const lrfs = new FuzzySearch(["privateKeyName"]);
 
   networkReqRes.method = "GET";
 
@@ -37,7 +37,7 @@ test("GET requests are ignored", () => {
 });
 
 test("type value pairs in request/request body are masked", () => {
-  const lrfs = new fuzzySearch(["email"]);
+  const lrfs = new FuzzySearch(["email"]);
 
   networkReqRes.body = JSON.stringify({
     contact: { type: "email", value: "secret@ex.com" },
