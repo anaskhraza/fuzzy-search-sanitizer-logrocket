@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 Fuzzy Search Sanitizer For LogRocket
+=======
+# Fuzzy Search Sanitizer For LogRocket
+
+🚀 LogRocket Fuzzy Search Sanitizer
+This is a modified version of logrocket-fuzzy-search
+>>>>>>> 28a8045dadd1852cb8da8c6b048bc89a2173ff49
 
 🚀 LogRocket Fuzzy Search Sanitizer This is a modified version of logrocket-fuzzy-search
 
