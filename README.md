@@ -3,8 +3,6 @@
 🚀 LogRocket Fuzzy Search Sanitizer
 This is a modified version of logrocket-fuzzy-search
 
-🚀 LogRocket Fuzzy Search Sanitizer This is a modified version of logrocket-fuzzy-search
-
 Build Status
 
 Optional LogRocket plugin to help sanitize data from network requests and responses.
