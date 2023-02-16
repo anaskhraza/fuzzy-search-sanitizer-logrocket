@@ -1,6 +1,10 @@
-# 🚀 LogRocket Fuzzy Search Sanitizer
+Fuzzy Search Sanitizer For LogRocket
 
-[![Build Status](https://travis-ci.com/jbailey4/logrocket-fuzzy-search-sanitizer.svg?branch=master)](https://travis-ci.com/jbailey4/logrocket-fuzzy-search-sanitizer)
+🚀 LogRocket Fuzzy Search Sanitizer This is a modified version of logrocket-fuzzy-search
+
+Build Status
+
+Optional LogRocket plugin to help sanitize data from network requests and responses.
 
 Optional LogRocket plugin to help sanitize data from network requests and responses.
 
@@ -20,23 +24,25 @@ Note: You must have LogRocket installed and an app ID ready to use. See the [qui
 
 1. Import this plugin along with LogRocket
 2. Call the setup method on this plugin, passing an array of the private field names
-    - the setup method returns a hash with the 2 sanitizer methods
+   - the setup method returns a hash with the 2 sanitizer methods
 3. Init LogRocket
 4. Specify a configuration with the `network` option and pass in the sanitizer methods
 
 #### Example
 
 ```es6
-import LogRocket from 'logrocket';
-import LogrocketFuzzySanitizer from 'logrocket-fuzzy-search-sanitizer';
+import LogRocket from "logrocket";
+import LogrocketFuzzySanitizer from "logrocket-fuzzy-search-sanitizer";
 
-const { requestSanitizer, responseSanitizer } = LogrocketFuzzySanitizer.setup([...privateFieldNames]);
+const { requestSanitizer, responseSanitizer } = LogrocketFuzzySanitizer.setup([
+  ...privateFieldNames,
+]);
 
-LogRocket.init('app/id', {
+LogRocket.init("app/id", {
   network: {
     requestSanitizer,
-    responseSanitizer
-  }
+    responseSanitizer,
+  },
 });
 ```
 
@@ -47,21 +53,29 @@ This is the first argument passed to the `setup` method, and should be an array 
 For example, if your app obtains user sensitive data such as social security numbers, first name, date of birth, etc.:
 
 ```es6
-import LogRocket from 'logrocket';
-import LogrocketFuzzySanitizer from 'logrocket-fuzzy-search-sanitizer';
+import LogRocket from "logrocket";
+import LogrocketFuzzySanitizer from "logrocket-fuzzy-search-sanitizer";
 
-const privateFieldNames = [
-  'ssn',
-  'firstName',
-  'birthDate'
-];
+const privateFieldNames = ["ssn", "firstName", "birthDate"];
 
-const { requestSanitizer, responseSanitizer } = LogrocketFuzzySanitizer.setup(privateFieldNames);
-LogRocket.init('app/id', {
+const { requestSanitizer, responseSanitizer } =
+  LogrocketFuzzySanitizer.setup(privateFieldNames);
+LogRocket.init("app/id", {
   network: {
     requestSanitizer,
-    responseSanitizer
-  }
+    responseSanitizer,
+  },
+});
+const matchWholeWord = true;
+const { requestSanitizer, responseSanitizer } = LogrocketFuzzySanitizer.setup(
+  privateFieldNames,
+  matchWholeWord
+);
+LogRocket.init("app/id", {
+  network: {
+    requestSanitizer,
+    responseSanitizer,
+  },
 });
 ```
 
