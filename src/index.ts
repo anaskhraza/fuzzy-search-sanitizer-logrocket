@@ -30,8 +30,8 @@ export default class FuzzySearch {
 
   constructor(
     privateFields: string[],
-    excFieldsFrmSubstringMatch?: string[],
-    isSubStringMatch?: boolean
+    excFieldsFrmSubstringMatch: string[] = [],
+    isSubStringMatch: boolean = true
   ) {
     this.fields = privateFields;
     this.excFieldsFrmSubstringMatch = excFieldsFrmSubstringMatch;
