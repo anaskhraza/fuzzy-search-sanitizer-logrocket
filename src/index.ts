@@ -7,8 +7,16 @@ interface INetworkRequestResponse {
 }
 
 export default class FuzzySearch {
-  public static setup(fields: string[], isSubStringMatch?: boolean) {
-    const instance = new FuzzySearch(fields, isSubStringMatch);
+  public static setup(
+    fields: string[],
+    excFieldsFrmSubstringMatch?: string[],
+    isSubStringMatch?: boolean
+  ) {
+    const instance = new FuzzySearch(
+      fields,
+      excFieldsFrmSubstringMatch,
+      isSubStringMatch
+    );
 
     return {
       requestSanitizer: instance.requestSanitizer.bind(instance),
@@ -17,10 +25,16 @@ export default class FuzzySearch {
   }
 
   public fields: string[] = [];
-  public isSubStringMatch?: boolean = false;
+  public excFieldsFrmSubstringMatch?: string[] = [];
+  public isSubStringMatch?: boolean = true;
 
-  constructor(privateFields: string[], isSubStringMatch?: boolean) {
+  constructor(
+    privateFields: string[],
+    excFieldsFrmSubstringMatch?: string[],
+    isSubStringMatch?: boolean
+  ) {
     this.fields = privateFields;
+    this.excFieldsFrmSubstringMatch = excFieldsFrmSubstringMatch;
     this.isSubStringMatch = isSubStringMatch;
   }
 
@@ -110,7 +124,12 @@ export default class FuzzySearch {
 
     if (this.isSubStringMatch) {
       return fields.some(
-        (field) => normalizedKeyName.indexOf(field.toLowerCase()) > -1
+        (field) => {
+          if (this.excFieldsFrmSubstringMatch?.includes(field)) {
+            return normalizedKeyName === field.toLowerCase();
+          }
+          return normalizedKeyName.indexOf(field.toLowerCase()) > -1
+        }
       );
     } else {
       const fieldsLowerCase = fields.map((x) => x.toLowerCase());

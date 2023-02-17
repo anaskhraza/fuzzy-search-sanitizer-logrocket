@@ -47,3 +47,41 @@ test("type value pairs in request/request body are masked", () => {
 
   expect(result.body.contact.value).toMatch("*");
 });
+
+test("type value pairs in request/request body are masked without excluded", () => {
+  const lrfs = new FuzzySearch(["email", "Age", "payoutagentname"]);
+
+  networkReqRes.body = JSON.stringify({
+    contact: [
+      { type: "email", value: "secret@ex.com" },
+      { type: "age", value: "20" },
+      { type: "payoutagentname", value: "hello" },
+    ],
+  });
+
+  const result = lrfs.responseSanitizer(networkReqRes);
+
+  expect(result.body.contact[0].value).toMatch("*");
+  expect(result.body.contact[1].value).toMatch("*");
+  expect(result.body.contact[2].value).toMatch("*");
+});
+
+test("type value pairs in request/request body are masked with excluded", () => {
+  const lrfs = new FuzzySearch(["email", "Age"], ["Age"]);
+
+  networkReqRes.body = JSON.stringify({
+    contact: [
+      { type: "email", value: "secret@ex.com" },
+      { type: "age", value: "20" },
+      { type: "payoutagentname", value: "hello" },
+    ],
+  });
+
+  const result = lrfs.responseSanitizer(networkReqRes);
+
+  expect(result.body.contact[0].value).toMatch("*");
+  expect(result.body.contact[1].value).toMatch("*");
+  expect(result.body.contact[2].value).toMatch("hello");
+});
+
+
